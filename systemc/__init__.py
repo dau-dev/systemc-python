@@ -1,7 +1,6 @@
 import os
 
-
-__version__ = "3.0.2.0"
+__version__ = "3.0.2.1"
 
 
 def include_path():
