@@ -12,7 +12,7 @@ authors = [
 description = "Python wrapping/binding for systemc"
 readme = "README.md"
 license = { text = "Apache-2.0" }
-version = "3.0.2.0"
+version = "3.0.2.1"
 requires-python = ">=3.10"
 keywords = []
 
@@ -60,7 +60,7 @@ Repository = "https://github.com/dau-dev/systemc-python"
 Homepage = "https://github.com/dau-dev/systemc-python"
 
 [tool.bumpversion]
-current_version = "3.0.2.0"
+current_version = "3.0.2.1"
 commit = true
 tag = true
 commit_args = "-s"
@@ -116,6 +116,7 @@ fail_under = 50
 artifacts = [
     "systemc/bin/",
     "systemc/include/",
+    "systemc/lib/",
     "systemc/tests/",
 ]
 [tool.hatch.build.sources]
@@ -153,11 +154,13 @@ exclude = [
     "/.gitmodules",
     "/.gitignore",
     "/pyproject.toml",
+    "!/lib/",
+    "!/lib/**",
 ]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "systemc/include" = "include/systemc"
-"systemc/lib" = "lib/systemc"
+"systemc/lib" = "lib/"
 "systemc/share" = "share/systemc"
 
 [tool.pytest.ini_options]
