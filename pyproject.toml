@@ -1,0 +1,196 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "systemc"
+authors = [
+    {name = "the systemc-python authors", email = "dev@dau.dev"},
+]
+description = "Python wrapping/binding for systemc"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+version = "3.0.2.0"
+requires-python = ">=3.10"
+keywords = []
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+cli = [
+    "rich",
+    "typer",
+]
+develop = [
+    "build",
+    "bump-my-version",
+    "check-dist",
+    "cibuildwheel",
+    "codespell",
+    "hatchling",
+    "mdformat",
+    "mdformat-tables>=1",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "twine",
+    "ty",
+    "uv",
+    "wheel",
+]
+
+[project.scripts]
+systemc-cli = "systemc.cli:main"
+
+[project.urls]
+Repository = "https://github.com/dau-dev/systemc-python"
+Homepage = "https://github.com/dau-dev/systemc-python"
+
+[tool.bumpversion]
+current_version = "3.0.2.0"
+commit = true
+tag = true
+commit_args = "-s"
+
+[[tool.bumpversion.files]]
+filename = "systemc/__init__.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[tool.cibuildwheel]
+build = "cp310-* cp311-* cp312-* cp313-* cp314-*"
+test-command = "echo 'TODO'"
+test-requires = []
+
+[tool.cibuildwheel.linux]
+before-all = """make dependencies-linux && PATH=/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH make build-systemc && make copy-systemc"""
+repair-wheel-command = ""
+skip = "*i686 musllinux*"
+
+[tool.cibuildwheel.macos]
+before-all = """make dependencies-macos && PATH=/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH make build-systemc && make copy-systemc"""
+repair-wheel-command = ""
+environment = {MACOSX_DEPLOYMENT_TARGET="11.0"}
+archs = "arm64"
+
+[tool.cibuildwheel.windows]
+before-all = """make dependencies-win && make build-systemc && make copy-systemc"""
+archs = "AMD64"
+environment = {WIN_FLEX_BISON="C:/ProgramData/chocolatey/lib/winflexbison3/tools"}
+skip = "*win32 *arm_64"
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "systemc/tests/integration/",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "@(abc\\.)?abstractmethod",
+]
+ignore_errors = true
+fail_under = 50
+
+[tool.hatch.build]
+artifacts = [
+    "systemc/bin/",
+    "systemc/include/",
+    "systemc/tests/",
+]
+[tool.hatch.build.sources]
+src = "/"
+
+[tool.hatch.build.targets.sdist]
+packages = [
+    "systemc",
+    "hatch_plugin.py",
+    "src",
+]
+include = [
+    "LICENSE",
+    "README.md",
+]
+exclude = [
+    "/.github",
+    "/scripts",
+    "/src",
+    "/.gitmodules",
+    "/.gitignore",
+    "/pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel.hooks.custom]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "systemc",
+]
+exclude = [
+    "/.github",
+    "/scripts",
+    "/src",
+    "/.gitmodules",
+    "/.gitignore",
+    "/pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"systemc/include" = "include/systemc"
+"systemc/lib" = "lib/systemc"
+"systemc/share" = "share/systemc"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-vvv",
+    "--junitxml=junit.xml",
+]
+testpaths = "systemc/tests"
+
+[tool.ruff]
+line-length = 150
+
+[tool.ruff.lint]
+extend-select = [
+    "I",
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+default-section = "third-party"
+known-first-party = [
+    "systemc",
+]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401",
+    "F403",
+]
