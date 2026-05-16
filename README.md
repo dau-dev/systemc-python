@@ -2,9 +2,9 @@
 
 Python wrapping/binding for systemc
 
-[![Build Status](https://github.com/dau-dev/systemc/actions/workflows/build.yaml/badge.svg?branch=main&event=push)](https://github.com/dau-dev/systemc/actions/workflows/build.yaml)
-[![codecov](https://codecov.io/gh/dau-dev/systemc/branch/main/graph/badge.svg)](https://codecov.io/gh/dau-dev/systemc)
-[![License](https://img.shields.io/github/license/dau-dev/systemc)](https://github.com/dau-dev/systemc)
+[![Build Status](https://github.com/dau-dev/systemc-python/actions/workflows/build.yaml/badge.svg?branch=main&event=push)](https://github.com/dau-dev/systemc-python/actions/workflows/build.yaml)
+[![codecov](https://codecov.io/gh/dau-dev/systemc-python/branch/main/graph/badge.svg)](https://codecov.io/gh/dau-dev/systemc-python)
+[![License](https://img.shields.io/github/license/dau-dev/systemc-python)](https://github.com/dau-dev/systemc-python)
 [![PyPI](https://img.shields.io/pypi/v/systemc.svg)](https://pypi.python.org/pypi/systemc)
 
 ## Overview
