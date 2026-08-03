@@ -1,4 +1,4 @@
-from systemc import *  # noqa
+from systemc import *
 
 
 def test_all():
