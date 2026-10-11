@@ -41,6 +41,7 @@ develop = [
     "codespell",
     "hatchling",
     "mdformat",
+    "mdformat-frontmatter",
     "mdformat-tables>=1",
     "pytest",
     "pytest-cov",
@@ -99,7 +100,7 @@ skip = "*win32 *arm_64"
 [tool.coverage.run]
 branch = true
 omit = [
-    "systemc/tests/integration/",
+    "systemc/tests/integration/*",
 ]
 
 [tool.coverage.report]
